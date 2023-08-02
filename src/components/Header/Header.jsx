@@ -6,11 +6,11 @@ import * as css from './Header.styled';
 export const Header = () => {
   return (
     <>
-      <css.Container>
+      <css.HeaderContainer>
         <Logo />
         <LanguageSwitcher />
         <Search />
-      </css.Container>
+      </css.HeaderContainer>
     </>
   );
 };

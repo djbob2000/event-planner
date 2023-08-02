@@ -1,5 +1,8 @@
 :root {
   --primary-background-color: #ffffff;
+  --light: #ffffff;
+  --button-hover: #6243ff;
+  --button-disable: #aca7c3;
   --text: #3f3f3f;
   --accent: #7b61ff;
   --hight: #ff2b77;

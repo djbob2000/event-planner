@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Search } from 'react-swm-icon-pack';
 import { CrossSmall } from 'react-swm-icon-pack';
+import { device } from '../../styles/deviceBreakpoints';
 
 export const SearchContainer = styled.div`
   padding: 12px;
@@ -16,11 +17,11 @@ export const SearchContainer = styled.div`
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
   order: 3;
 
-  @media (min-width: 768px) {
+  @media ${device.tablet} {
     order: 2;
     max-width: 368px;
   }
-  @media (min-width: 1280px) {
+  @media ${device.desktop} {
     order: 2;
     max-width: 410px;
   }
