@@ -8,7 +8,7 @@ export const Button = styled.button`
   gap: 4px;
 
   border-radius: 8px;
-  background: var(--background-color);
+  background: var(--primary-background-color);
 
   /* sdw2 */
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
@@ -55,4 +55,9 @@ export const Li = styled.li`
 
 export const Wrapper = styled.div`
   position: relative;
+  order: 2;
+
+  @media (min-width: 768px) {
+    order: 3;
+  }
 `;
