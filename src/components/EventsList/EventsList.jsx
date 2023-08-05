@@ -1,7 +1,7 @@
 import { EventCard } from '../EventCard/EventCard';
-import * as s from './EventList.styled';
+import * as s from './EventsList.styled';
 
-export const EventList = ({ events }) => {
+export const EventsList = ({ events }) => {
   return (
     <s.List>
       {events.map(event => (

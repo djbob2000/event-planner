@@ -1,12 +1,5 @@
 import styled from 'styled-components';
-import { Filters2 } from 'react-swm-icon-pack';
 import { device } from '../../styles/deviceBreakpoints';
-
-export const Filters2Icon = styled(Filters2)`
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-`;
 
 export const Button = styled.button`
   display: flex;
@@ -23,9 +16,10 @@ export const Button = styled.button`
   font-weight: 500;
   line-height: normal;
   background: var(--light);
-
-  /* sdw2 */
   box-shadow: 2px 4px 9px 0px rgba(166, 141, 174, 0.28);
+  &:hover {
+    color: var(--button-hover);
+  }
 `;
 
 export const Span = styled.span`
@@ -33,4 +27,10 @@ export const Span = styled.span`
   @media ${device.tablet} {
     display: initial;
   }
+`;
+
+export const Svg = styled.svg`
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 `;

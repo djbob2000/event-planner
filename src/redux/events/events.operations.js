@@ -11,7 +11,7 @@ export const fetchEvents = createAsyncThunk(
       const { data } = await axios.get('/events', {
         params: {
           page: 1,
-          limit: 6,
+          limit: 8,
         },
       });
       return data;

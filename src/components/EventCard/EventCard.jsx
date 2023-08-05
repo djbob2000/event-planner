@@ -1,12 +1,24 @@
-// import { BUTTON_SIZES } from '../../constants/ButtonSizes';
-// import { Button } from '../Button/Button';
 import * as s from './EventCard.styled';
-
 import defaultImg from '../../assets/images/default-img-card.svg';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const EventCard = () => {
+export const EventCard = ({ event }) => {
+  const navigate = useNavigate();
   const [isMouseOver, setIsMouseOver] = useState(false);
+
+  const {
+    id,
+    title,
+    description,
+    date,
+    time,
+    location,
+    category,
+    image,
+    priority,
+  } = event;
+
   return (
     <s.EventCardContainer
       onMouseOver={() => {
@@ -16,24 +28,31 @@ export const EventCard = () => {
         setIsMouseOver(false);
       }}
     >
+      <s.ChipWrapper>
+        <s.Chip>{category} </s.Chip>
+        <s.Chip priorityColor={priority}>{priority}</s.Chip>
+      </s.ChipWrapper>
       <s.EventImageContainer>
-        <s.EventImage src={defaultImg} alt="Event" />
+        <s.EventImage src={image ?? defaultImg} alt={title ?? 'event'} />
       </s.EventImageContainer>
       <s.EventDescriptionContainer $isMouseOver={isMouseOver}>
         <s.DateTimeContainer>
-          <s.DateTimeText>12.07 at 12:00</s.DateTimeText>
-          <s.DateTimeText>Kyiv</s.DateTimeText>
+          <s.DateTimeText>
+            {date} at {time}
+          </s.DateTimeText>
+          <s.DateTimeText>{location}</s.DateTimeText>
         </s.DateTimeContainer>
         <s.EventDetailsWrapper>
-          <s.EventTitle>Title</s.EventTitle>
-          <s.EventDescription>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore,
-            ducimus rem nostrum eligendi ipsam tempora fugiat culpa repellat
-            saepe, quaerat delectus est mollitia beatae aut! Ipsum doloribus
-            necessitatibus maxime similique.
-          </s.EventDescription>
+          <s.EventTitle>{title}</s.EventTitle>
+          <s.EventDescription>{description}</s.EventDescription>
           <s.MoreInfoButtonContainer>
-            <s.MoreInfoButton type="button" title="More info">
+            <s.MoreInfoButton
+              type="button"
+              title="More info"
+              onClick={() => {
+                navigate(`event/${id}`);
+              }}
+            >
               More info
             </s.MoreInfoButton>
           </s.MoreInfoButtonContainer>

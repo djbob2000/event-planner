@@ -1,13 +1,44 @@
 import styled from 'styled-components';
 
+const getPriorityColor = priority => {
+  switch (priority) {
+    case 'high':
+      return 'var(--high)';
+    case 'medium':
+      return 'var(--medium)';
+    case 'low':
+      return 'var(--low)';
+    default:
+      return 'var(--accent)';
+  }
+};
+
 export const EventCardContainer = styled.div`
   position: relative;
   border-radius: 12px;
   overflow: hidden;
   min-width: 272px;
-  max-width: 332px;
+  /* max-width: 332px; */
   height: 480px;
   box-shadow: var(--shadow-primary);
+`;
+
+export const ChipWrapper = styled.div`
+  position: absolute;
+  left: 12px;
+  top: 12px;
+
+  display: flex;
+  gap: 12px;
+`;
+export const Chip = styled.span`
+  display: flex;
+  padding: 6px 12px;
+  align-items: center;
+  align-self: stretch;
+  border-radius: 8px;
+  color: ${({ priorityColor }) => getPriorityColor(priorityColor)};
+  background-color: var(--primary-background-color);
 `;
 
 export const EventImageContainer = styled.div`

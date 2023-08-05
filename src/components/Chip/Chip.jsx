@@ -1,6 +1,6 @@
-import * as s from './Mark.styled';
+import * as s from './Chip.styled';
 
-export const Mark = ({ text, color = 'var(--accent)' }) => {
+export const Chip = ({ text, color = 'var(--accent)' }) => {
   return (
     <s.Container color={color}>
       <s.Span>{text}</s.Span>
