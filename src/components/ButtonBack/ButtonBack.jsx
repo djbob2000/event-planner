@@ -1,5 +1,5 @@
 import sprite from '../../assets/images/sprite.svg';
-import * as css from './BackButton.styled';
+import * as css from './ButtonBack.styled';
 
 export const ButtonBack = () => {
   return (

@@ -5,12 +5,12 @@ import * as css from './Header.styled';
 
 export const Header = () => {
   return (
-    <>
+    <header>
       <css.HeaderContainer>
         <Logo />
         <LanguageSwitcher />
         <Search />
       </css.HeaderContainer>
-    </>
+    </header>
   );
 };

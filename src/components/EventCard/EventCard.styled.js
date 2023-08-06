@@ -37,7 +37,8 @@ export const Chip = styled.span`
   align-items: center;
   align-self: stretch;
   border-radius: 8px;
-  color: ${({ priorityColor }) => getPriorityColor(priorityColor)};
+  text-transform: capitalize;
+  color: ${({ $priorityColor }) => getPriorityColor($priorityColor)};
   background-color: var(--primary-background-color);
 `;
 
@@ -79,7 +80,7 @@ export const DateTimeContainer = styled.div`
 `;
 
 export const DateTimeText = styled.p`
-  color: var(--color-accent);
+  color: var(--accent);
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;

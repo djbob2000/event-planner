@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Plus } from 'react-swm-icon-pack';
-import { device } from '../../styles/deviceBreakpoints';
+import { device } from '../../../styles/deviceBreakpoints';
+import { Link } from 'react-router-dom';
 
 export const PlusIcon = styled(Plus)`
   width: 24px;
@@ -8,7 +9,7 @@ export const PlusIcon = styled(Plus)`
   flex-shrink: 0;
 `;
 
-export const Button = styled.button`
+export const StyledLink = styled(Link)`
   display: flex;
   padding: 16px;
   justify-content: center;

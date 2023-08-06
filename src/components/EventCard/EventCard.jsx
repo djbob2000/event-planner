@@ -30,7 +30,7 @@ export const EventCard = ({ event }) => {
     >
       <s.ChipWrapper>
         <s.Chip>{category} </s.Chip>
-        <s.Chip priorityColor={priority}>{priority}</s.Chip>
+        <s.Chip $priorityColor={priority}>{priority}</s.Chip>
       </s.ChipWrapper>
       <s.EventImageContainer>
         <s.EventImage src={image ?? defaultImg} alt={title ?? 'event'} />

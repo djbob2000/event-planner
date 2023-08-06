@@ -9,7 +9,7 @@ import { fetchEvents } from '../../redux/events/events.operations';
 import { resetEvents } from '../../redux/events/events.slice';
 import { selectEvents } from '../../redux/selectors';
 
-export const MyEventsPage = () => {
+const MyEventsPage = () => {
   const dispatch = useDispatch();
   const allEvents = useSelector(selectEvents);
   const [filteredEvents, setFilteredEvents] = useState(allEvents);
@@ -30,17 +30,18 @@ export const MyEventsPage = () => {
 
   return (
     <>
-      <css.MyEventsPageContainer>
-        <css.Wrapper>
-          <css.H1>My events</css.H1>
-          <css.ButtonWrapper>
-            <ButtonCategory handleFilterCategory={handleFilterCategory} />
-            <ButtonSort />
-            <ButtonAddEvent />
-          </css.ButtonWrapper>
-        </css.Wrapper>
-        {filteredEvents && <EventsList events={filteredEvents} />}
-      </css.MyEventsPageContainer>
+      <css.Wrapper>
+        <css.H1>My events</css.H1>
+        <css.ButtonWrapper>
+          <ButtonCategory handleFilterCategory={handleFilterCategory} />
+          <ButtonSort />
+          <ButtonAddEvent />
+        </css.ButtonWrapper>
+      </css.Wrapper>
+
+      {filteredEvents && <EventsList events={filteredEvents} />}
     </>
   );
 };
+
+export default MyEventsPage;
