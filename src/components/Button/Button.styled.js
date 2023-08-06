@@ -40,11 +40,13 @@ export const ButtonPrimary = styled.button`
   padding: ${paddingSize};
   border-radius: ${borderRadiusSize};
   width: ${widthSize};
-  max-width: 193px;
   color: var(--light);
   background-color: var(--accent);
   box-shadow: var(--shadow-primary);
   transition: background-color var(--animation);
+  @media ${device.tablet} {
+    max-width: 193px;
+  }
 
   &:hover {
     background-color: var(--button-hover);

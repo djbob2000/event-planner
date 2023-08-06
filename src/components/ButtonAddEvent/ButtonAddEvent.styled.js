@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Plus } from 'react-swm-icon-pack';
-import { device } from '../../../styles/deviceBreakpoints';
+import { device } from '../../styles/deviceBreakpoints';
 import { Link } from 'react-router-dom';
 
 export const PlusIcon = styled(Plus)`
