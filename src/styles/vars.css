@@ -1,4 +1,5 @@
 :root {
+  --font-primary: 'Poppins', sans-serif;
   /* colors */
   --primary-background-color: #ffffff;
   --primary-background-color-80: rgba(255, 255, 255, 0.8);

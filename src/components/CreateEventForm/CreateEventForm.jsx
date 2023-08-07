@@ -3,19 +3,12 @@ import * as Yup from 'yup';
 import * as s from './CreateEventForm.styled';
 import { ButtonClearField } from '../ButtonClearField/ButtonClearField';
 import { PRIORITY } from '../../constants/priority';
+import { CATEGORIES } from '../../constants/categories';
 import { Button } from '../Button/Button.jsx';
+import { CustomSelect } from '../CustomSelect/CustomSelect';
 
-const eventCategory = [
-  'art',
-  'music',
-  'business',
-  'conference',
-  'workshop',
-  'party',
-  'sport',
-];
-
-// const priorityCategory = ['high', 'medium', 'low'];
+const priorityArray = Object.values(PRIORITY);
+const categoryArray = Object.values(CATEGORIES);
 
 const CreateEventValidationSchema = Yup.object().shape({
   title: Yup.string()
@@ -35,6 +28,10 @@ const CreateEventValidationSchema = Yup.object().shape({
     )
     .min(3, 'Title must be at least 6 characters')
     .max(50, 'Title must not exceed 50 characters'),
+  date: Yup.string().required('Date is required'),
+  time: Yup.string().required('Time is required'),
+  category: Yup.string().required('Category is required'),
+  priority: Yup.string().required('Priority is required'),
 });
 
 export const CreateEventForm = () => {
@@ -59,7 +56,6 @@ export const CreateEventForm = () => {
             '🚀 ~ file: CreateEventForm.jsx:58 ~ CreateEventForm ~ values:',
             values
           );
-          alert('FORMIK');
         }}
       >
         {({
@@ -76,11 +72,11 @@ export const CreateEventForm = () => {
             <s.FieldsWrapper>
               <s.Label>
                 Title:
-                <s.StyledField type="text" name="title" error={errors.title} />
+                <s.StyledField type="text" name="title" $error={errors.title} />
                 <s.StyledErrorMessage name="title" component="div" />
                 {values.title && (
                   <ButtonClearField
-                    error={errors.title}
+                    $error={errors.title}
                     onClick={() => setFieldValue('title', '')}
                   />
                 )}
@@ -91,11 +87,11 @@ export const CreateEventForm = () => {
                 <s.StyledTextArea
                   as="textarea"
                   name="description"
-                  error={errors.description}
+                  $error={errors.description}
                 />
                 {values.description && (
                   <ButtonClearField
-                    error={errors.description}
+                    $error={errors.description}
                     onClick={() => setFieldValue('description', '')}
                   />
                 )}
@@ -103,12 +99,14 @@ export const CreateEventForm = () => {
 
               <s.Label>
                 Select Date:
-                <s.StyledField type="date" name="date" />
+                <s.StyledField type="date" name="date" $error={errors.date} />
+                <s.StyledErrorMessage name="date" component="div" />
               </s.Label>
 
               <s.Label>
                 Select Time:
-                <s.StyledField type="time" name="time" />
+                <s.StyledField type="time" name="time" $error={errors.time} />
+                <s.StyledErrorMessage name="time" component="div" />
               </s.Label>
 
               <s.Label>
@@ -116,12 +114,12 @@ export const CreateEventForm = () => {
                 <s.StyledField
                   type="text"
                   name="location"
-                  error={errors.title}
+                  $error={errors.title}
                 />
                 <s.StyledErrorMessage name="location" component="div" />
                 {values.location && (
                   <ButtonClearField
-                    error={errors.title}
+                    $error={errors.title}
                     onClick={() => setFieldValue('location', '')}
                   />
                 )}
@@ -129,14 +127,13 @@ export const CreateEventForm = () => {
 
               <s.Label>
                 Category:
-                <s.StyledField as="select" name="category">
-                  <option value="">Select a category</option>
-                  {eventCategory.map(category => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </s.StyledField>
+                <CustomSelect
+                  name="category"
+                  options={categoryArray}
+                  setFieldValue={setFieldValue}
+                  error={errors.category}
+                />
+                <s.StyledErrorMessage name="category" component="div" />
               </s.Label>
 
               <s.Label disabled={true}>
@@ -146,16 +143,22 @@ export const CreateEventForm = () => {
 
               <s.Label>
                 Priority:
-                <s.StyledField as="select" name="priority">
-                  {Object.keys(PRIORITY).map(priorityKey => (
-                    <option key={priorityKey} value={priorityKey}>
-                      {PRIORITY[priorityKey]}
-                    </option>
-                  ))}
-                </s.StyledField>
+                <CustomSelect
+                  name="priority"
+                  options={priorityArray}
+                  setFieldValue={setFieldValue}
+                  error={errors.priority}
+                />
+                <s.StyledErrorMessage name="priority" component="div" />
               </s.Label>
             </s.FieldsWrapper>
-            <Button type="submit" disabled={isSubmitting} title="Save" />
+            <s.BtnWrap>
+              <Button
+                type="submit"
+                disabled={errors || isSubmitting}
+                title="Save"
+              />
+            </s.BtnWrap>
           </s.StyledForm>
         )}
       </Formik>
