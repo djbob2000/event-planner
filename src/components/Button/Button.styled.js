@@ -39,7 +39,7 @@ export const ButtonPrimary = styled.button`
   align-items: center;
   padding: ${paddingSize};
   border-radius: ${borderRadiusSize};
-  width: ${widthSize};
+  width: 100%;
   color: var(--light);
   background-color: var(--accent);
   box-shadow: var(--shadow-primary);

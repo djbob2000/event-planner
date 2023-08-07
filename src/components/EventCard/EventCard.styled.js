@@ -117,7 +117,7 @@ export const MoreInfoButton = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-
+  cursor: pointer;
   color: var(--light, #fff);
   text-align: center;
   font-family: Poppins;

@@ -1,11 +1,13 @@
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
 import * as s from './CreateEventForm.styled';
 import { ButtonClearField } from '../ButtonClearField/ButtonClearField';
 import { PRIORITY } from '../../constants/priority';
 import { CATEGORIES } from '../../constants/categories';
 import { Button } from '../Button/Button.jsx';
 import { CustomSelect } from '../CustomSelect/CustomSelect';
+import { addEvent } from '../../redux/events/events.operations';
 
 const priorityArray = Object.values(PRIORITY);
 const categoryArray = Object.values(CATEGORIES);
@@ -35,6 +37,8 @@ const CreateEventValidationSchema = Yup.object().shape({
 });
 
 export const CreateEventForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     title: '',
     description: '',
@@ -46,17 +50,31 @@ export const CreateEventForm = () => {
     priority: '',
   };
 
+  const handleSubmit = (values, { resetForm }) => {
+    const payload = {
+      title: values.title,
+      description: values.description,
+      date: values.date,
+      time: values.time,
+      location: values.location,
+      category: values.category,
+      image: values.picture,
+      priority: values.priority,
+    };
+
+    dispatch(addEvent(payload));
+    resetForm();
+    // toast.success("Event added successfully");
+  };
+
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={CreateEventValidationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(
-            '🚀 ~ file: CreateEventForm.jsx:58 ~ CreateEventForm ~ values:',
-            values
-          );
-        }}
+        onSubmit={(values, { resetForm }) =>
+          handleSubmit(values, { resetForm })
+        }
       >
         {({
           values,
@@ -156,7 +174,7 @@ export const CreateEventForm = () => {
               <Button
                 type="submit"
                 disabled={errors || isSubmitting}
-                title="Save"
+                title="Add event"
               />
             </s.BtnWrap>
           </s.StyledForm>
