@@ -7,12 +7,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEvents } from '../../redux/events/events.operations';
 import { resetEvents } from '../../redux/events/events.slice';
-import { selectEvents } from '../../redux/selectors';
+import { selectEvents, selectFilteredEvents } from '../../redux/selectors';
 
 const MyEventsPage = () => {
   const dispatch = useDispatch();
   const allEvents = useSelector(selectEvents);
-  const [filteredEvents, setFilteredEvents] = useState(allEvents);
+  const filteredEvents = useSelector(selectFilteredEvents);
 
   useEffect(() => {
     dispatch(resetEvents());
@@ -39,7 +39,7 @@ const MyEventsPage = () => {
         </css.ButtonWrapper>
       </css.Wrapper>
 
-      {allEvents && <EventsList events={allEvents} />}
+      {filteredEvents && <EventsList events={filteredEvents} />}
     </>
   );
 };

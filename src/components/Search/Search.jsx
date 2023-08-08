@@ -1,16 +1,15 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import * as css from './Search.styled';
+import { setFilterQuery } from '../../redux/filter/filter.slice';
+import { selectFilter } from '../../redux/selectors';
 
 export const Search = () => {
-  const [query, setQuery] = useState('');
-
-  const handleSearchChange = e => {
-    console.log('handleSearchChange');
-    setQuery(e.target.value);
-  };
+  const dispatch = useDispatch();
+  const filterQuery = useSelector(selectFilter);
 
   const handleClearQuery = () => {
-    setQuery('');
+    dispatch(setFilterQuery(''));
   };
 
   return (
@@ -19,11 +18,12 @@ export const Search = () => {
         <css.SearchIcon size="24" color="var(--accent)" />
         <css.SearchInput
           type="text"
+          autoComplete="off"
           placeholder="Search by keywords"
-          value={query}
-          onChange={event => setQuery(event.target.value)}
+          value={filterQuery}
+          onChange={event => dispatch(setFilterQuery(event.target.value))}
         />
-        {query ? (
+        {filterQuery ? (
           <css.CrossSmallIcon
             onClick={handleClearQuery}
             size="24"
