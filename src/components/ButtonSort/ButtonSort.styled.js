@@ -3,10 +3,6 @@ import { device } from '../../styles/deviceBreakpoints';
 
 export const Wrapper = styled.div`
   position: relative;
-
-  @media ${device.tablet} {
-    min-width: 170px;
-  }
 `;
 
 export const Button = styled.button`
