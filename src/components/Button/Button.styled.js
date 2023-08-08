@@ -22,16 +22,6 @@ const borderRadiusSize = ({ size }) => {
       return '8px';
   }
 };
-const widthSize = ({ size }) => {
-  switch (size) {
-    case BTN_SIZE.small:
-      return 'auto';
-    case BTN_SIZE.large:
-      return '100%';
-    default:
-      return '100%';
-  }
-};
 
 export const ButtonPrimary = styled.button`
   display: flex;

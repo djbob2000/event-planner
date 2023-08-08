@@ -1,8 +1,8 @@
 import { ButtonBack } from '../../components/ButtonBack/ButtonBack';
 import * as s from './EventEditPage.styled';
 import { CreateEventForm } from '../../components/CreateEventForm/CreateEventForm';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { selectEventsById } from '../../redux/selectors';
 
 const EventEditPage = () => {

@@ -18,7 +18,6 @@ export const EventCardContainer = styled.div`
   border-radius: 12px;
   overflow: hidden;
   min-width: 272px;
-  /* max-width: 332px; */
   height: 480px;
   box-shadow: var(--shadow-primary);
 `;

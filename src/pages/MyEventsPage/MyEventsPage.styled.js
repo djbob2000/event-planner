@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { Container } from '../../components/Container/Container.styled';
 import { device } from '../../styles/deviceBreakpoints';
 
 export const H1 = styled.h1`

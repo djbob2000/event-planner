@@ -2,6 +2,19 @@ import styled from 'styled-components';
 import { device } from '../../styles/deviceBreakpoints';
 import { Link } from 'react-router-dom';
 
+const getPriorityColor = priority => {
+  switch (priority) {
+    case 'High':
+      return 'var(--high)';
+    case 'Medium':
+      return 'var(--medium)';
+    case 'Low':
+      return 'var(--low)';
+    default:
+      return 'var(--accent)';
+  }
+};
+
 export const H1 = styled.h1`
   color: var(--text);
   font-size: 24px;
@@ -13,7 +26,6 @@ export const H1 = styled.h1`
 `;
 
 export const Container = styled.div`
-  /* width: 100%; */
   margin-left: auto;
   margin-right: auto;
   @media ${device.tablet} {
@@ -95,11 +107,14 @@ export const Badge = styled.div`
   box-shadow: 4px 5px 9px 0px rgba(166, 141, 174, 0.28);
   text-transform: capitalize;
 `;
+
+export const BadgeColor = styled(Badge)`
+  color: ${({ $priorityColor }) => getPriorityColor($priorityColor)};
+`;
 export const BtnWrap = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 24px;
-  /* flex: 0 0 0; */
 `;
 export const StyledLink = styled(Link)`
   max-width: 100%;

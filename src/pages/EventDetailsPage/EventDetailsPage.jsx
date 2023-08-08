@@ -6,8 +6,7 @@ import { selectEventsById } from '../../redux/selectors';
 import * as s from './EventDetailsPage.styled';
 import { Button } from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteEvent, fetchEvents } from '../../redux/events/events.operations';
-import { resetEvents } from '../../redux/events/events.slice';
+import { deleteEvent } from '../../redux/events/events.operations';
 import { convertDateFormat } from '../../utils/dateConverter';
 
 const EventDetailsPage = () => {
@@ -54,9 +53,7 @@ const EventDetailsPage = () => {
             <s.Description>{description}</s.Description>
             <s.BadgesWrap>
               <s.Badge>{category}</s.Badge>
-              <s.Badge style={{ color: 'var(--hight, #FF2B77' }}>
-                {priority}
-              </s.Badge>
+              <s.BadgeColor $priorityColor={priority}>{priority}</s.BadgeColor>
               <s.Badge>{location}</s.Badge>
               <s.Badge
                 style={{ fontWeight: '400', textTransform: 'lowercase' }}

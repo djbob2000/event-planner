@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as css from './Search.styled';
 import { setFilterQuery } from '../../redux/filter/filter.slice';

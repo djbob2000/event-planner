@@ -30,22 +30,31 @@ export const ButtonCategory = () => {
     <>
       <css.Wrapper ref={ClickAreaRef}>
         <css.Button
+          $isActive={!!currCategory}
           onClick={() => {
             setIsShowDropdown(!isShowDropdown);
           }}
         >
-          <css.Span>Category</css.Span>
+          <css.Span>{currCategory ? currCategory : 'Category'}</css.Span>
           <css.Svg>
             <use href={`${sprite}#filters-3`} />
           </css.Svg>
         </css.Button>
+
         {isShowDropdown && (
           <css.WrapperDropdown>
             <css.WrapTitle>
+              <css.Span
+                onClick={() => {
+                  setIsShowDropdown(false);
+                }}
+                style={{ display: isShowDropdown && 'initial' }}
+              >
+                Category
+              </css.Span>
               <css.Svg>
                 <use href={`${sprite}#filters-3`} />
               </css.Svg>
-              <css.Span>Category</css.Span>
             </css.WrapTitle>
             <css.Ul>
               {Object.keys(CATEGORIES).map(categoryKey => (
@@ -55,7 +64,7 @@ export const ButtonCategory = () => {
                     setIsShowDropdown(false);
                     handleSetCategory(CATEGORIES[categoryKey]);
                   }}
-                  isActive={CATEGORIES[categoryKey] === currCategory}
+                  $isActive={CATEGORIES[categoryKey] === currCategory}
                 >
                   {CATEGORIES[categoryKey]}
                 </css.Li>

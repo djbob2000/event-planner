@@ -27,22 +27,22 @@ export const selectFilteredAndSortedEvents = createSelector(
     });
 
     switch (sortFilter) {
-      case 'name-asc':
+      case 'name_asc':
         filteredEvents.sort((a, b) => a.title.localeCompare(b.title));
         break;
-      case 'name-desc':
+      case 'name_desc':
         filteredEvents.sort((a, b) => b.title.localeCompare(a.title));
         break;
-      case 'date-asc':
+      case 'date_asc':
         filteredEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
         break;
-      case 'date-desc':
+      case 'date_desc':
         filteredEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
         break;
-      case 'priority-asc':
+      case 'priority_asc':
         filteredEvents.sort((a, b) => a.priority - b.priority);
         break;
-      case 'priority-desc':
+      case 'priority_desc':
         filteredEvents.sort((a, b) => b.priority - a.priority);
         break;
       default:

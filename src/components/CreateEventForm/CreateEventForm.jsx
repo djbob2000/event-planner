@@ -77,7 +77,6 @@ export const CreateEventForm = ({ event }) => {
       dispatch(addEvent(payload));
       resetForm();
       navigate(`/`);
-      // toast.success("Event added successfully");
     }
   };
 
