@@ -4,7 +4,7 @@ import backgroundImage from '../../assets/images/background.svg';
 import { device } from '../../styles/deviceBreakpoints';
 
 export const Main = styled(Container)`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: var(--primary-background-color);
   background-repeat: no-repeat;

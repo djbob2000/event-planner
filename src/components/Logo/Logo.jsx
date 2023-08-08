@@ -4,7 +4,7 @@ import * as css from './Logo.styled';
 export const Logo = () => {
   return (
     <>
-      <css.A href="./">
+      <css.A href="/">
         <img src={logo} alt="Logo Event Planner" />
       </css.A>
     </>

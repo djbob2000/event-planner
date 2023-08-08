@@ -2,6 +2,7 @@ import * as s from './EventCard.styled';
 import defaultImg from '../../assets/images/default-img-card.svg';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { convertDateFormat } from '../../utils/dateConverter';
 
 export const EventCard = ({ event }) => {
   const navigate = useNavigate();
@@ -28,17 +29,17 @@ export const EventCard = ({ event }) => {
         setIsMouseOver(false);
       }}
     >
-      <s.ChipWrapper>
-        <s.Chip>{category} </s.Chip>
-        <s.Chip $priorityColor={priority}>{priority}</s.Chip>
-      </s.ChipWrapper>
+      <s.BadgeWrapper>
+        <s.Badge>{category} </s.Badge>
+        <s.Badge $priorityColor={priority}>{priority}</s.Badge>
+      </s.BadgeWrapper>
       <s.EventImageContainer>
-        <s.EventImage src={image ?? defaultImg} alt={title ?? 'event'} />
+        <s.EventImage src={image || defaultImg} alt={title || 'event'} />
       </s.EventImageContainer>
       <s.EventDescriptionContainer $isMouseOver={isMouseOver}>
         <s.DateTimeContainer>
           <s.DateTimeText>
-            {date} at {time}
+            {convertDateFormat(date)} at {time}
           </s.DateTimeText>
           <s.DateTimeText>{location}</s.DateTimeText>
         </s.DateTimeContainer>

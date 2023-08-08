@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const getPriorityColor = priority => {
   switch (priority) {
-    case 'high':
+    case 'High':
       return 'var(--high)';
-    case 'medium':
+    case 'Medium':
       return 'var(--medium)';
-    case 'low':
+    case 'Low':
       return 'var(--low)';
     default:
       return 'var(--accent)';
@@ -23,7 +23,7 @@ export const EventCardContainer = styled.div`
   box-shadow: var(--shadow-primary);
 `;
 
-export const ChipWrapper = styled.div`
+export const BadgeWrapper = styled.div`
   position: absolute;
   left: 12px;
   top: 12px;
@@ -31,7 +31,7 @@ export const ChipWrapper = styled.div`
   display: flex;
   gap: 12px;
 `;
-export const Chip = styled.span`
+export const Badge = styled.span`
   display: flex;
   padding: 6px 12px;
   align-items: center;

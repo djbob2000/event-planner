@@ -39,7 +39,7 @@ const MyEventsPage = () => {
         </css.ButtonWrapper>
       </css.Wrapper>
 
-      {filteredEvents && <EventsList events={filteredEvents} />}
+      {allEvents && <EventsList events={allEvents} />}
     </>
   );
 };

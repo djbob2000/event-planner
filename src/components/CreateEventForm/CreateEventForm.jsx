@@ -1,13 +1,14 @@
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as s from './CreateEventForm.styled';
 import { ButtonClearField } from '../ButtonClearField/ButtonClearField';
 import { PRIORITY } from '../../constants/priority';
 import { CATEGORIES } from '../../constants/categories';
 import { Button } from '../Button/Button.jsx';
 import { CustomSelect } from '../CustomSelect/CustomSelect';
-import { addEvent } from '../../redux/events/events.operations';
+import { addEvent, editEvent } from '../../redux/events/events.operations';
 
 const priorityArray = Object.values(PRIORITY);
 const categoryArray = Object.values(CATEGORIES);
@@ -36,18 +37,25 @@ const CreateEventValidationSchema = Yup.object().shape({
   priority: Yup.string().required('Priority is required'),
 });
 
-export const CreateEventForm = () => {
+export const CreateEventForm = ({ event }) => {
+  const { id } = useParams();
+  const isEditMode = !!event;
+  console.log(
+    '🚀 ~ file: CreateEventForm.jsx:41 ~ CreateEventForm ~ event:',
+    event
+  );
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const initialValues = {
-    title: '',
-    description: '',
-    date: '',
-    time: '',
-    location: '',
-    category: '',
-    picture: '',
-    priority: '',
+    title: event?.title || '',
+    description: event?.description || '',
+    date: event?.date || '',
+    time: event?.time || '',
+    location: event?.location || '',
+    category: event?.category || '',
+    picture: event?.picture || '',
+    priority: event?.priority || '',
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -61,10 +69,16 @@ export const CreateEventForm = () => {
       image: values.picture,
       priority: values.priority,
     };
-
-    dispatch(addEvent(payload));
-    resetForm();
-    // toast.success("Event added successfully");
+    if (isEditMode) {
+      dispatch(editEvent({ id, ...payload }));
+      resetForm();
+      navigate(`/event/${id}`);
+    } else {
+      dispatch(addEvent(payload));
+      resetForm();
+      navigate(`/`);
+      // toast.success("Event added successfully");
+    }
   };
 
   return (
@@ -103,7 +117,7 @@ export const CreateEventForm = () => {
               <s.Label>
                 Description:
                 <s.StyledTextArea
-                  as="textarea"
+                  component="textarea"
                   name="description"
                   $error={errors.description}
                 />
@@ -174,7 +188,7 @@ export const CreateEventForm = () => {
               <Button
                 type="submit"
                 disabled={errors || isSubmitting}
-                title="Add event"
+                title={!isEditMode ? 'Add event' : 'Save'}
               />
             </s.BtnWrap>
           </s.StyledForm>

@@ -1,18 +1,23 @@
 import { ButtonBack } from '../../components/ButtonBack/ButtonBack';
 import { BTN_SIZE } from '../../constants/btnSizes';
-import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
+import defaultImg from '../../assets/images/default-img-card.svg';
+import { useNavigate, useParams } from 'react-router-dom';
 import { selectEventsById } from '../../redux/selectors';
 import * as s from './EventDetailsPage.styled';
 import { Button } from '../../components/Button/Button';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteEvent } from '../../redux/events/events.operations';
+import { deleteEvent, fetchEvents } from '../../redux/events/events.operations';
+import { resetEvents } from '../../redux/events/events.slice';
+import { convertDateFormat } from '../../utils/dateConverter';
 
 const EventDetailsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const id = 4;
   const [event] = useSelector(selectEventsById(id));
+  if (!event) {
+    return <p>Event not found</p>;
+  }
 
   const {
     title,
@@ -28,12 +33,12 @@ const EventDetailsPage = () => {
   const handleDeleteEvent = async () => {
     console.log('Delete event');
     await dispatch(deleteEvent(id));
-    navigate('/home');
+
+    navigate(`/`);
   };
 
   const handleEditEvent = async () => {
-    console.log('handleEditEvent');
-    navigate('/event/${id}/edit');
+    navigate(`/event/${id}/edit`);
   };
 
   return (
@@ -43,7 +48,7 @@ const EventDetailsPage = () => {
         <s.H1>EventDetailsPage</s.H1>
         <s.Wrap>
           <s.ImageWrap>
-            <s.Image src={image} alt={title} />
+            <s.Image src={image || defaultImg} alt={title || 'event'} />
           </s.ImageWrap>
           <s.InnerWrap>
             <s.Description>{description}</s.Description>
@@ -53,8 +58,10 @@ const EventDetailsPage = () => {
                 {priority}
               </s.Badge>
               <s.Badge>{location}</s.Badge>
-              <s.Badge style={{ fontWeight: '400' }}>
-                {date}
+              <s.Badge
+                style={{ fontWeight: '400', textTransform: 'lowercase' }}
+              >
+                {convertDateFormat(date)}
                 {' at '}
                 {time}
               </s.Badge>

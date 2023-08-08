@@ -24,9 +24,9 @@ export const fetchEvents = createAsyncThunk(
 
 export const addEvent = createAsyncThunk(
   'events/add',
-  async (order, thunkAPI) => {
+  async (event, thunkAPI) => {
     try {
-      const { data } = await axios.post(`/events/`, order);
+      const { data } = await axios.post(`/events/`, event);
 
       return data;
     } catch (error) {
@@ -44,6 +44,22 @@ export const deleteEvent = createAsyncThunk(
       if (response.status === 200) {
         return id;
       }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editEvent = createAsyncThunk(
+  'events/editEvent',
+  async (editedEvent, thunkAPI) => {
+    try {
+      const { data } = await axios.put(
+        `/events/${editedEvent.id}`,
+        editedEvent
+      );
+
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
