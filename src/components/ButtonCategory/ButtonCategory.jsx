@@ -1,24 +1,45 @@
 import * as css from './ButtonCategory.styled';
 import sprite from '../../assets/images/sprite.svg';
 import { CATEGORIES } from '../../constants/categories';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCategoryFilter } from '../../redux/filter/filter.slice';
+import { useClickAway, useKeyPressEvent } from 'react-use';
+import { selectCategoryFilter } from '../../redux/selectors';
 
-export const ButtonCategory = ({ handleFilterCategory }) => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const handleClick = () => {
-    setShowDropdown(!showDropdown);
+export const ButtonCategory = () => {
+  const dispatch = useDispatch();
+  const currCategory = useSelector(selectCategoryFilter);
+
+  const [isShowDropdown, setIsShowDropdown] = useState(false);
+
+  const ClickAreaRef = useRef();
+  useClickAway(ClickAreaRef, () => {
+    setIsShowDropdown(false);
+  });
+
+  useKeyPressEvent('Escape', () => {
+    setIsShowDropdown(false);
+  });
+
+  const handleSetCategory = cat => {
+    dispatch(setCategoryFilter(cat));
   };
 
   return (
     <>
-      <css.Wrapper>
-        <css.Button onClick={handleClick}>
+      <css.Wrapper ref={ClickAreaRef}>
+        <css.Button
+          onClick={() => {
+            setIsShowDropdown(!isShowDropdown);
+          }}
+        >
           <css.Span>Category</css.Span>
           <css.Svg>
             <use href={`${sprite}#filters-3`} />
           </css.Svg>
         </css.Button>
-        {showDropdown && (
+        {isShowDropdown && (
           <css.WrapperDropdown>
             <css.WrapTitle>
               <css.Svg>
@@ -31,9 +52,10 @@ export const ButtonCategory = ({ handleFilterCategory }) => {
                 <css.Li
                   key={categoryKey}
                   onClick={() => {
-                    setShowDropdown(false);
-                    handleFilterCategory(CATEGORIES[categoryKey]);
+                    setIsShowDropdown(false);
+                    handleSetCategory(CATEGORIES[categoryKey]);
                   }}
+                  isActive={CATEGORIES[categoryKey] === currCategory}
                 >
                   {CATEGORIES[categoryKey]}
                 </css.Li>

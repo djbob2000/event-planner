@@ -1,6 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 export const selectEvents = state => state.events.events;
-export const selectFilter = state => state.filter;
+export const selectTextFilter = state => state.filter.filterQuery;
+export const selectCategoryFilter = state => state.filter.categoryFilter;
+export const selectSortFilter = state => state.filter.sortFilter;
 
 export const selectEventsById = id =>
   createSelector(selectEvents, events => {
@@ -8,11 +10,45 @@ export const selectEventsById = id =>
     return filtered;
   });
 
-export const selectFilteredEvents = createSelector(
-  [selectEvents, selectFilter],
-  (events, filter) => {
-    return events.filter(event =>
-      event.title.toLowerCase().includes(filter.toLowerCase())
+export const selectFilteredAndSortedEvents = createSelector(
+  [selectEvents, selectTextFilter, selectCategoryFilter, selectSortFilter],
+  (events, textFilter, categoryFilter, sortFilter) => {
+    const filteredByTitleEvents = events.filter(
+      event =>
+        event.title.toLowerCase().includes(textFilter.toLowerCase()) ||
+        event.description.toLowerCase().includes(textFilter.toLowerCase())
     );
+
+    const filteredEvents = filteredByTitleEvents.filter(event => {
+      if (categoryFilter === '') {
+        return true;
+      }
+      return event.category === categoryFilter;
+    });
+
+    switch (sortFilter) {
+      case 'name-asc':
+        filteredEvents.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'name-desc':
+        filteredEvents.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case 'date-asc':
+        filteredEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+        break;
+      case 'date-desc':
+        filteredEvents.sort((a, b) => new Date(b.date) - new Date(a.date));
+        break;
+      case 'priority-asc':
+        filteredEvents.sort((a, b) => a.priority - b.priority);
+        break;
+      case 'priority-desc':
+        filteredEvents.sort((a, b) => b.priority - a.priority);
+        break;
+      default:
+        break;
+    }
+
+    return filteredEvents;
   }
 );

@@ -61,7 +61,8 @@ export const Ul = styled.ul`
 export const Li = styled.li`
   cursor: pointer;
   padding: 8px 24px;
-  color: var(--divider, #aca7c3);
+  color: ${props =>
+    props.isActive ? 'var(--accent)' : 'var(--divider, #aca7c3)'};
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

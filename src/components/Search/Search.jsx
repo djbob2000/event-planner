@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as css from './Search.styled';
 import { setFilterQuery } from '../../redux/filter/filter.slice';
-import { selectFilter } from '../../redux/selectors';
+import { selectTextFilter } from '../../redux/selectors';
 
 export const Search = () => {
   const dispatch = useDispatch();
-  const filterQuery = useSelector(selectFilter);
+  const filterQuery = useSelector(selectTextFilter);
 
   const handleClearQuery = () => {
     dispatch(setFilterQuery(''));
