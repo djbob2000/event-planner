@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import * as s from './Button.styled';
 import { BTN_SIZE } from '../../constants/btnSizes';
 
@@ -21,4 +23,12 @@ export const Button = ({
       )}
     </>
   );
+};
+
+Button.propTypes = {
+  type: PropTypes.string,
+  title: PropTypes.string,
+  size: PropTypes.string,
+  secondary: PropTypes.bool,
+  onClick: PropTypes.func,
 };
